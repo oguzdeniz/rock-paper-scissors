@@ -16,13 +16,21 @@
       </div>
 
       <div class="selection">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+        <button id="rock" class="btn">Rock</button>
+        <button id="paper" class="btn">Paper</button>
+        <button id="scissors" class="btn">Scissors</button>
       </div>
       <div class="choices">
-        Your Choice: <span class="choice" id="choice">dddd</span>
+        <div>
+          Your Choice: <span class="choice" id="playerChoice">N/A</span>
+        </div>
+        <div>
+          Computer's Choice: <span class="choice" id="compChoice">N/A</span>
+        </div>
       </div>
+
+      <div class="result">Result: <span id="result"></span></div>
+      <button class="btn reset" id="reset">Restart</button>
     </div>
   </body>
 </html>

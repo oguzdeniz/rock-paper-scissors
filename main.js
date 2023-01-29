@@ -1,5 +1,14 @@
 console.log('Welcome to the game')
 
+const btnRock = document.getElementById('rock')
+const btnPaper = document.getElementById('paper')
+const btnScissors = document.getElementById('scissors')
+const compChoiceSpan = document.getElementById('compChoice')
+const resultDiv = document.getElementById('result')
+const btnReset = document.getElementById('reset')
+let counter = 1
+const resultArray = []
+
 function getComputerChoice() {
   const choices = ['rock', 'paper', 'scissors']
   const idx = Math.floor(Math.random() * choices.length)
@@ -7,60 +16,72 @@ function getComputerChoice() {
   return choice
 }
 
-function getPlayerChoice() {
-  let check = true
-  let choice = ''
-  while (check) {
-    const inp = parseInt(
-      prompt(
-        `Select one from the list ['1 for rock', "2 for paper", "3 for scissors" ] `
-      )
-    )
-    if (inp === 1) {
-      choice = 'rock'
-      check = false
-    } else if (inp === 2) {
-      choice = 'paper'
-      check = false
-    } else if (inp === 3) {
-      choice = 'scissors'
-      check = false
-    } else {
-      alert('Please enter 1, or 2, or 3')
-    }
-  }
-
-  return choice
+function disableButtons() {
+  btnRock.disabled = true
+  btnPaper.disabled = true
+  btnScissors.disabled = true
+  btnRock.classList
 }
 
-let tie = 0
+// function getPlayerChoice() {
+//   let check = true
+//   let choice = ''
+//   while (check) {
+//     const inp = parseInt(
+//       prompt(
+//         `Select one from the list ['1 for rock', "2 for paper", "3 for scissors" ] `
+//       )
+//     )
+//     if (inp === 1) {
+//       choice = 'rock'
+//       check = false
+//     } else if (inp === 2) {
+//       choice = 'paper'
+//       check = false
+//     } else if (inp === 3) {
+//       choice = 'scissors'
+//       check = false
+//     } else {
+//       alert('Please enter 1, or 2, or 3')
+//     }
+//   }
+
+//   return choice
+// }
+
 function playRound(playerSelection, compSelection) {
   if (playerSelection === compSelection) {
-    tie++
-    return 'This is tie!'
+    console.log('This is a tie!')
+    return 'tie'
   }
 
   if (playerSelection === 'rock') {
     if (compSelection === 'scissors') {
-      return 'You win! Rock beats scissors'
+      console.log('You win! Rock beats scissors')
+      return 'win'
     } else if (compSelection === 'paper') {
-      return 'You lose! Paper beats rock'
+      console.log('You lose! Paper beats rock')
+      return 'lose'
     }
   }
 
   if (playerSelection === 'paper') {
     if (compSelection === 'rock') {
-      return 'You win! Paper beats rock'
+      console.log('You win! Paper beats rock')
+      return 'win'
     } else if (compSelection === 'scissors') {
-      return 'You lose! Scissors beats paper'
+      console.log('You lose! Scissors beats paper')
+      return 'lose'
     }
   }
 
   if (playerSelection === 'scissors') {
     if (compSelection === 'paper') {
-      return 'You win! Scissors beats paper'
+      console.log('You win! Scissors beats paper')
+      return 'win'
     } else if (compSelection === 'rock') {
-      return 'You lose! Rock beats scissors'
+      console.log('You lose! Rock beats scissors')
+      return 'lose'
     }
   }
 }
@@ -85,21 +106,41 @@ function playRound(playerSelection, compSelection) {
 //   `You win ${win} rounds; tie in ${tie}; lose in ${rounds - win - tie}`
 // )
 
-const btnRock = document.getElementById('rock')
-const btnPaper = document.getElementById('paper')
-const btnScissors = document.getElementById('scissors')
+function playAndShowResult(playerChoice) {
+  const playerChoiceSpan = document.getElementById('playerChoice')
+  const compChoice = getComputerChoice()
+  playerChoiceSpan.textContent = playerChoice
+  compChoiceSpan.textContent = compChoice
+  const result = playRound(playerChoice, compChoice)
+  const resultSpan = document.getElementById('result')
+  console.log({ result })
+  resultArray.push(result)
+  let resultContent = '<div>'
+  let count = 1
+  resultArray.forEach((r) => {
+    resultContent += '<div>' + 'Round ' + count + ': ' + r + '</div>'
+    count++
+  })
+  resultContent += '</div>'
+  console.log({ resultContent })
+  resultSpan.innerHTML = resultContent
+}
 
-const choice = document.getElementById('choice')
+function handleClick(e) {
+  const playerChoice = e.target.innerText.toLowerCase()
+  const res = playAndShowResult(playerChoice)
+  counter++
+  if (counter > 5) {
+    disableButtons()
+    btnReset.style.display = 'block'
+  }
+}
 
-btnRock.addEventListener('click', () => {
-  console.log('rock')
-  choice.textContent = 'rock'
-})
-btnPaper.addEventListener('click', () => {
-  console.log('paper')
-  choice.textContent = 'paper'
-})
-btnScissors.addEventListener('click', () => {
-  console.log('scissors')
-  choice.textContent = 'scissors'
-})
+function restartGame() {
+  location.reload()
+}
+
+btnRock.addEventListener('click', handleClick)
+btnPaper.addEventListener('click', handleClick)
+btnScissors.addEventListener('click', handleClick)
+btnReset.addEventListener('click', restartGame)

@@ -1,3 +1,6 @@
+:root {
+  --button-active-color: rgba(214, 91, 214, 0.9);
+}
 .container {
   width: 60%;
   margin: auto;
@@ -12,17 +15,33 @@
   margin-bottom: 40px;
 }
 
-.selection button {
+.btn {
   min-width: 160px;
   padding: 8px 30px;
   background: rgb(244, 244, 244);
   border: 2px solid transparent;
   border-radius: 4px;
+  cursor: pointer;
+  outline: 0;
 }
-.selection button:hover {
-  border: solid 2px purple;
+.btn:enabled:hover {
+  border: solid 2px var(--button-active-color);
   /* background: orange; */
 }
-.selection button:active {
-  background: rgb(243, 102, 20);
+.btn:enabled:active {
+  background: var(--button-active-color);
+}
+.selection button:disabled {
+  color: rgb(250, 245, 245);
+}
+
+.choices {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.reset {
+  display: none;
+  margin-top: 20px;
 }
