@@ -13,14 +13,15 @@
 }
 
 .selection button {
-  border: solid 2px purple;
-  background: transparent;
   min-width: 160px;
   padding: 8px 30px;
+  background: rgb(244, 244, 244);
+  border: 2px solid transparent;
   border-radius: 4px;
 }
 .selection button:hover {
-  background: orange;
+  border: solid 2px purple;
+  /* background: orange; */
 }
 .selection button:active {
   background: rgb(243, 102, 20);
