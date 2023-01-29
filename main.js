@@ -65,22 +65,41 @@ function playRound(playerSelection, compSelection) {
   }
 }
 
-let win = 0
-let check = true
-const rounds = 6
-for (let i = 0; i < rounds; i++) {
-  const ps = getPlayerChoice()
+// let win = 0
+// let check = true
+// const rounds = 6
+// for (let i = 0; i < rounds; i++) {
+//   const ps = getPlayerChoice()
 
-  const cs = getComputerChoice()
-  console.log(`Round: ${i + 1}\nplayer: ${ps} vs computer: ${cs}`)
-  const response = playRound(ps, cs)
-  if (response.includes('You win')) {
-    win++
-    console.log(`${response}\nYou win this round. Total wins: ${win}`)
-  } else {
-    console.log(`${response}\n`)
-  }
-}
-console.log(
-  `You win ${win} rounds; tie in ${tie}; lose in ${rounds - win - tie}`
-)
+//   const cs = getComputerChoice()
+//   console.log(`Round: ${i + 1}\nplayer: ${ps} vs computer: ${cs}`)
+//   const response = playRound(ps, cs)
+//   if (response.includes('You win')) {
+//     win++
+//     console.log(`${response}\nYou win this round. Total wins: ${win}`)
+//   } else {
+//     console.log(`${response}\n`)
+//   }
+// }
+// console.log(
+//   `You win ${win} rounds; tie in ${tie}; lose in ${rounds - win - tie}`
+// )
+
+const btnRock = document.getElementById('rock')
+const btnPaper = document.getElementById('paper')
+const btnScissors = document.getElementById('scissors')
+
+const choice = document.getElementById('choice')
+
+btnRock.addEventListener('click', () => {
+  console.log('rock')
+  choice.textContent = 'rock'
+})
+btnPaper.addEventListener('click', () => {
+  console.log('paper')
+  choice.textContent = 'paper'
+})
+btnScissors.addEventListener('click', () => {
+  console.log('scissors')
+  choice.textContent = 'scissors'
+})
